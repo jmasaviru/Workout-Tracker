@@ -3,38 +3,40 @@ const db = require("../models/");
 
 
 
-// GET Routes for api.js to get the last workout and range
+// GET routes to get the last workout and range
 router.get("/api/workouts/", (req, res) => {
-    db.Workout.find().then(dbWorkouts => {
-        res.json(dbWorkouts);
+    Workout.find({}).then(dbWorkout => {
+        res.json(dbWorkout);
       }).catch(err => {
         res.json(err);
       });
   });
 
-  router.get("/api/workouts/range", ({ query }, res) => {
-    db.Workout.find().then(dbWorkouts => {
-        res.json(dbWorkouts);
-      }).catch(err => {
-        res.json(err);
+  router.get("/api/workouts/range", (req, res) => {
+    Workout.find({}).then(dbWorkout => {
+        console.log(dbWorkout);
+        res.json(dbWorkout);
+      })
+      .catch(err => {
+          res.json(err);
       });
   });
 
 // POST route that creates a new workout
-router.post("/api/workouts", ({ body }, res) => {
-    db.Workout.create(body).then(dbWorkouts => {
-          console.log(dbWorkouts)
-        res.json(dbWorkouts);
+router.post("/api/workouts", (req, res) => {
+    Workout.create({}).then(dbWorkout => {
+        console.log(dbWorkout)
+        res.json(dbWorkout);
       })
       .catch(err => {
-        res.json(err);
+          res.json(err);
       });
   });
 
 // PUT route that updates a workout
-router.put("/api/workouts/:id", ({ body, params}, res) => {
+router.put("/api/workouts/:id", ({ body, params }, res) => {
     console.log(params)
-    db.Workout.findByIdAndUpdate(params.id,
+    Workout.findByIdAndUpdate(params.id,
         { 
             $push: 
             { 
@@ -43,8 +45,8 @@ router.put("/api/workouts/:id", ({ body, params}, res) => {
         },
         { new: true, runValidators: true }
       )
-      .then(dbWorkouts => res.json(dbWorkouts))
-      .catch(err => {
+      .then(dbWorkout => { res.json(dbWorkout);
+      }).catch(err => {
         console.log("err", err)
         res.json(err)
       })
@@ -52,12 +54,10 @@ router.put("/api/workouts/:id", ({ body, params}, res) => {
 
 // Delete Route
 router.delete("/api/workouts/:id", (req, res) => {
-    db.Author.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then((dbWorkouts) => {
-      res.json(dbWorkouts);
+    Workout.findByIdAndDelete(body.id).then(() => {
+        res.json(true);
+    }).catch(err => {
+      res.json(err);
     });
   });
 
