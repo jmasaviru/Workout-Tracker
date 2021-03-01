@@ -1,7 +1,9 @@
 # Workout Tracker
 
 ![Workout Tracker Gif](/public/assets/images/workout.gif)
+
 A workout tracker that enables the user to view create and track daily workouts. It allows the user to log multiple exercises in a workout on a given day. It also enables the user to track the name, type, weight, sets, reps, and duration of exercise. For example in a cardio exercise, the user will be able to track the distance they have traveled.
+
 ![Workout Tracker Screenshot](/public/assets/images/screenshot0.png)
 
 ## Table of Contents
