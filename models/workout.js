@@ -39,8 +39,11 @@ const workoutSchema = new Schema(
       }
     ]
   },
-
-);
+  {
+    toJSON: {
+        virtuals: true
+    }
+});
 
 // To track the duration of exercises
 workoutSchema.virtual("totalDuration").get(function () {
